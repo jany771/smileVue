@@ -22,10 +22,18 @@
                 </van-swipe-item>
             </van-swipe>
         </div>
+        <!-- type-bar -->
+        <div class="type-bar">
+            <div v-for="(cate,index) in category" :key="index">
+                <img v-lazy="cate.image" width="90%" alt="">
+                <span>{{cate.mallCategoryName}}</span>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
     export default {
         data (){
             return{
@@ -35,8 +43,23 @@
                 {imageUrl:'https://trademark-pics-search.oss-cn-shanghai.aliyuncs.com/big/h4534361758057472.jpg'},
                 {imageUrl:'https://trademark-pics-search.oss-cn-shanghai.aliyuncs.com/big/h4534361789580288.jpg'},
                 {imageUrl:'https://trademark-pics-search.oss-cn-shanghai.aliyuncs.com/big/h4534361932694528.jpg'},
-            ]
+                ],
+                category:[]
             }
+        },
+        created () {
+            // axios.get('https://www.easy-mock.com/mock/5ebb6c1ca2293e5119c96abc/SimleVue/index')
+             axios.get('http://www.mocky.io/v2/5ebd0e3c310000e2c05b0fba')
+            .then(response=>{
+                    console.log(response);
+                    if(response.status==200){                    
+                        this.category = response.data.data.category;
+                         console.log("category:",this.category);
+                    }
+                }
+            ).catch((error)=>{
+                console.log(error)
+            })
         }
     }
 </script>
@@ -69,8 +92,24 @@
       clear: both;
       .swipe-img{
           width:100%;
-          height:14.2rem;
+          height:10.2rem;
       }
   }
     
+    // type-bar
+    .type-bar{
+        background-color: #fff;
+        margin:0 .3rem .3rem .3rem;
+        border-radius: .3rem;
+        font-size: 14px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+
+        div{
+            padding:.3rem;
+            font-size: 12px;
+            text-align: center;
+        }
+    }
 </style>

@@ -6,6 +6,6 @@ Vue.use(Router)
 
 export default new Router({
     routes:[
-        {path:'/',name:'ShoppingMall', component: ShoppingMall}
+        {path:'/',name:'ShoppingMall', component: ShoppingMall},//首页
     ]
 })
